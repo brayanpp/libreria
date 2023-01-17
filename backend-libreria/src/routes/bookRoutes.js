@@ -9,9 +9,9 @@ var router = express.Router();
 
 //Rutas de libros
 
-router.post('/save', Book.save());
-router.get('/getBooks', Book.getBooks());
-router.delete('/delete/:id', Book.delete());
+router.post('/save', Book.save);
+router.get('/getBooks', Book.getBooks);
+router.delete('/delete/:id', Book.delete);
 
 
 module.exports = router;

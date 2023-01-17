@@ -12,7 +12,7 @@ var bookController = {
         var params = req.body;
 
         var book = new Book();
-
+        
         //Asginación de valores:
         book.title = params.title;
         book.author = params.author;
