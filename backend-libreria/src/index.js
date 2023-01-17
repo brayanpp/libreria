@@ -9,7 +9,7 @@ const cors = require('cors');
 
 const port = 3900;
 
-var url = 'mongodb://localhost:27017/api_rest_libreria';
+var url = 'mongodb://127.0.0.1:27017/api_rest_libreria';
 
 mongoose.Promise = global.Promise;
 
