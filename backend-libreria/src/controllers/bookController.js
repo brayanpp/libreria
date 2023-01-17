@@ -21,7 +21,7 @@ var bookController = {
 
         //Guardar valores
 
-        book.save(err, bookStored =>{
+        book.save((err, bookStored) =>{
             if(err || !bookStored){
                 return res.status(404).send({
                     status: 'error',
@@ -67,10 +67,10 @@ var bookController = {
 
     delete: (req, res)=>{
         //Obtener ID del libro por URL
-        var bookId = req.params.bookId;
+        var bookId = req.params.id;
 
         Book.findOneAndDelete({_id: bookId}, (err, bookRemoved)=>{
-
+            console.log(err);
             if(err){
                 return res.status(500).send({
                     status: 'error',

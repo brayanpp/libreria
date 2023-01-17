@@ -20,7 +20,11 @@ app.use(cors());
 var book_routes = require('./routes/bookRoutes');
 
 app.use('/api', book_routes);
+mongoose.set('strictQuery', false);
+mongoose.connect(url, {useNewUrlParser: true}).then(() =>{
+    console.log('Connected to:  ' + url);
 
-app.listen(port, () => {
-    console.log("Server ON port: " + port );
+    app.listen(port, () => {
+        console.log("Server ON port: " + port );
+    });
 });
