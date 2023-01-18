@@ -36,7 +36,6 @@ var bookController = {
         });
     },
 
-
     //Listar libros
     getBooks: (req, res) => {
         var query = Book.find({});
@@ -64,7 +63,6 @@ var bookController = {
     },
 
     //Eliminar libros
-
     delete: (req, res)=>{
         //Obtener ID del libro por URL
         var bookId = req.params.id;
@@ -90,7 +88,47 @@ var bookController = {
                 bookRemoved
             });
         });
+    },
+
+    update: (req, res) => {
+        var params = req.body;
+        var book = new Book();
+
+        book._id = params._id
+        book.stock = params.stock;
+        console.log(book._id + " stock: " + book.stock);
+        const filter = { _id: book._id}
+        const update = { stock: book.stock}
+
+        /*book.findOneAndUpdate({filter, update},(err, bookUpdated) =>{
+            if(err||!bookUpdated){
+                return res.status(404).send({
+                    status: 'error',
+                    message: 'El libro no se ha actualizado'
+                })
+            }
+
+            return res.status(200).send({
+                status:'success',
+                bookUpdated
+            });
+        });*/
+        Book.findOneAndUpdate({ filter, update},(err, bookUpdated) =>{
+            if(err||!bookUpdated){
+            return res.status(404).send({
+                status: 'error',
+                message: 'El libro no se ha actualizado'
+                })
+            }
+
+            return res.status(200).send({
+                status:'success',
+                bookUpdated
+            })
+
+        })
     }
+
 }
 
 module.exports = bookController;

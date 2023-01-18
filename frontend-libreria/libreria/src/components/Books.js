@@ -11,21 +11,19 @@ const Books = () => {
     const [tableBooks, setTableBooks] = useState([]);
     const [busqueda, setBusqueda] = useState("");
     const url = Global.url;
-    const [show, setShow] = useState(false);
-
+    
 
     useEffect(() =>{
         getBooks();
         console.log(books);
 
-    }, [show]);
+    }, []);
 
     //Obtener todos los libros
-    const getBooks = async() =>{
-        await axios.get(url + 'getBooks').then(res =>{
+    const getBooks = () =>{
+        axios.get(url + 'getBooks').then(res =>{
             setBooks(res.data.books);
             setTableBooks(res.data.books);
-            setShow(true);
         })
     }
 
@@ -91,7 +89,7 @@ const Books = () => {
                     }
                 </div> */}
                 {
-                    show ? (
+                   books.length > 0 ? (
                         <table className='table table-sm table-bordered'>
                             <thead className="thead-dark">
                                 <tr>
