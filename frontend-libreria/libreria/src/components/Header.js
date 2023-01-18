@@ -14,9 +14,14 @@ const Header = () => {
                 
                 <ul className='navbar-nav'>
                     <li className="nav-item">
-                        <NavLink to="/books" className="nav-link">Libros</NavLink>
+                        <NavLink to="/books" className="nav-link">Inventario Libros</NavLink>
+                    </li>
+                    <li className='nabvar-nav'>
+                        <NavLink to="/sales" className="nav-link">Ventas</NavLink>
                     </li>
                 </ul>
+
+                
             </div>
 
         </nav>

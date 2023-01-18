@@ -13,7 +13,7 @@ const Book = ({id, bookData, delBook}) => {
     }
 
     return (
-        <div className='col'>
+       /* <div className='col'>
             <div className='card mx-auto mb-3'>
                 <div className='card-header'>
                     <h3 className='card-title'>{title}</h3>    
@@ -32,7 +32,19 @@ const Book = ({id, bookData, delBook}) => {
             </div>
 
            
-        </div>
+        </div> */
+        <>
+        <tr>
+            <td>{title}</td>
+            <td>{year_publication}</td>
+            <td>{stock}</td>
+            <td>{author}</td>
+            <td>{formatDate(date)}</td>
+        </tr>
+            
+            
+        </>
+        
     );
 }
 
