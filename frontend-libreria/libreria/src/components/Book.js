@@ -33,7 +33,7 @@ const Book = ({id, bookData, delBook}) => {
 
            
         </div> */
-        <>
+        
         <tr>
             <td>{title}</td>
             <td>{year_publication}</td>
@@ -43,7 +43,7 @@ const Book = ({id, bookData, delBook}) => {
         </tr>
             
             
-        </>
+        
         
     );
 }

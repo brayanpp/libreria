@@ -9,22 +9,37 @@ const Books = () => {
     
     const [books, setBooks] = useState([]);
     const [tableBooks, setTableBooks] = useState([]);
-    const [busqueda, setBusqueda] = useState([]);
+    const [busqueda, setBusqueda] = useState("");
     const url = Global.url;
-    
+    const [show, setShow] = useState(false);
+
 
     useEffect(() =>{
         getBooks();
         console.log(books);
 
-    }, [books.length]);
+    }, [show]);
 
     //Obtener todos los libros
-    const getBooks = () =>{
-        axios.get(url + 'getBooks').then(res =>{
+    const getBooks = async() =>{
+        await axios.get(url + 'getBooks').then(res =>{
             setBooks(res.data.books);
             setTableBooks(res.data.books);
+            setShow(true);
         })
+    }
+
+    const filtrar =(terminoBusqueda)=>{
+        var resultadosBusqueda = tableBooks.filter((elemento)=>{
+            if(elemento.author.toString().toLowerCase().includes(terminoBusqueda.toLowerCase()) ||
+                elemento.year_publication.toString().toLowerCase().includes(terminoBusqueda.toLowerCase())
+            ){
+                console.log(elemento);
+                return elemento;
+            };
+        });
+
+        setBooks(resultadosBusqueda);
     }
 
     //Eliminar libro por su ID
@@ -35,16 +50,22 @@ const Books = () => {
         })
     }
 
-    return (
+    const handleChange=e=>{
+        setBusqueda(e.target.value);
+        filtrar(e.target.value);
+    }
+
+    return (    
 
         <div className="publicaciones">
             <h1 className="mt-5">Librería Urabá</h1>
             <div className="container mt-3">
-                <div>
+                <div className="containerInput">
                     <input
                         className="form-control inputBuscar"
                         value={busqueda}
                         placeholder="Busqueda por autor o año de publicación"
+                        onChange={handleChange}
                     />
 
                     <button className="btn btn-success">
@@ -70,8 +91,8 @@ const Books = () => {
                     }
                 </div> */}
                 {
-                    books.length > 0 ? (
-                        <table className='table'>
+                    show ? (
+                        <table className='table table-sm table-bordered'>
                             <thead className="thead-dark">
                                 <tr>
                                     <th>Titulo</th>
