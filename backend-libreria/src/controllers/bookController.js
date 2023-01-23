@@ -94,38 +94,51 @@ var bookController = {
         var params = req.body;
         var book = new Book();
 
-        book._id = params._id
+        book._id = params.id
         book.stock = params.stock;
         console.log(book._id + " stock: " + book.stock);
-        const filter = { _id: book._id}
-        const update = { stock: book.stock}
 
-        /*book.findOneAndUpdate({filter, update},(err, bookUpdated) =>{
-            if(err||!bookUpdated){
+        const filter = { '_id': book._id}
+        const update = { 'stock': book.stock}
+        try {
+            Book.findOneAndUpdate(filter, update,{new:true},(err, bookUpdated) =>{
+                if(err||!bookUpdated){
+                    console.log("Acá");
+                    console.log(err);
+                    return res.status(404).send({
+                        status: 'error',
+                        message: 'El libro no se ha actualizado'
+                    });
+                }
+    
+                return res.status(200).send({
+                    status:'success',
+                    bookUpdated
+                });
+    
+            });
+        } catch (error) {
+            console.log(error + " error");
+        }
+        
+    },
+    
+    getStock: (req, res)=>{
+        const params = req.body;
+        const book = new Book();
+        const idBook = req.params.id;
+        Book.findById(idBook, 'stock',(err, result) =>{
+            if(err||!result){
                 return res.status(404).send({
                     status: 'error',
-                    message: 'El libro no se ha actualizado'
-                })
+                    message: 'El libro no se ha encontrado'
+                });
             }
 
             return res.status(200).send({
                 status:'success',
-                bookUpdated
+                stock: result
             });
-        });*/
-        Book.findOneAndUpdate({ filter, update},(err, bookUpdated) =>{
-            if(err||!bookUpdated){
-            return res.status(404).send({
-                status: 'error',
-                message: 'El libro no se ha actualizado'
-                })
-            }
-
-            return res.status(200).send({
-                status:'success',
-                bookUpdated
-            })
-
         })
     }
 

@@ -12,9 +12,10 @@ var router = express.Router();
 router.post('/save', Book.save);
 router.get('/getBooks', Book.getBooks);
 router.delete('/delete/:id', Book.delete);
-router.post('/update', Book.update);
+router.post('/updateStock', Book.update);
 
 router.post('/sale/save', Sale.save);
 router.get('/getSales', Sale.getSales);
+router.get('/getStock/:id', Book.getStock);
 
 module.exports = router;
