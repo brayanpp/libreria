@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Navigate } from 'react-router-dom';
 import Global from '../Global';
+import swal from 'sweetalert2';
 
 const New = () => {
 
@@ -31,6 +32,15 @@ const New = () => {
         })
     }
 
+    const alert = ()=>{
+        swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Libro guardado correctamente',
+            showConfirmButton: false,
+            timer: 1500
+        });
+    }
     const sendBook = (e) =>{
         //Evitar que se recargue la pantalla
         e.preventDefault();
@@ -39,9 +49,14 @@ const New = () => {
 
         //Petición HTTP por POST para guardar libro.
         axios.post(`${url}save`, book).then((res) =>{
-            setRedirect(true);
             console.log(res.data);
+
+            if(res.data!=null){
+                alert();
+                setRedirect(true);
+            }
         })
+
     }
 
     if(redirect){
