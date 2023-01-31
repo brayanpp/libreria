@@ -43,7 +43,7 @@ const NewSale = ()=>{
     const sendSale = async(e)=>{
         e.preventDefault();
 
-        if(idBook !=null && idBook !="  "){
+        if(idBook !=null && idBook !=""){
             const stock = await getStock();
             if(stock >= quantityV){
                 const sale = ({
@@ -101,7 +101,7 @@ const NewSale = ()=>{
         setSelectedBook("Seleccione un libro");
         setQuantity('');
         setPrice('');
-        setNote('');
+        setNote('Seleccione un metodo de pago');
     }
 
     const asignarValoresLibro =(e)=>{
@@ -143,8 +143,13 @@ const NewSale = ()=>{
                             </div>
 
                             <div className='mb-3'>
-                                <label>Nota</label>
-                                <input className='form-control' placeholder='detalles de venta' value={noteV} onChange={(e) => setNote(e.target.value)} type="text"/>
+                                <label>Metodo de pago</label>
+                                <select className='form-control' on onChange={(e) => setNote(e.target.value)}>
+                                    <option value="">Seleccione un metodo de pago</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="TD">Tarjeta debido</option>
+                                    <option value="TC">Tarjeta Credito</option>
+                                </select>
                             </div>
                                     
                             <div>
@@ -166,7 +171,7 @@ const NewSale = ()=>{
                                     <th>Libro</th>
                                     <th>Cantidad</th>
                                     <th>Precio</th>
-                                    <th>Nota</th>
+                                    <th>Metodo de pago</th>
                                     <th>Fecha venta</th>
                                 </tr>
                                 
